@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    if: github.repository_owner == '<%username%>'
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: yarn install --frozen-lockfile
+      - run: npm run lint --if-present
+  build:
+    if: github.repository_owner == '<%username%>'
+    needs: lint
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: yarn install --frozen-lockfile
+      - run: npm build --if-present
+  test:
+    if: github.repository_owner == '<%username%>'
+    needs:
+      - lint
+      - build
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: yarn install --frozen-lockfile
+      - run: npm run build --if-present
+      - run: npm run test --if-present
+
+  release:
+    if: github.repository_owner == '<%username%>'
+    needs:
+      - lint
+      - build
+      - test
+    name: Release Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: yarn install --frozen-lockfile
+      - run: npm run build --if-present
+      - run: yarn release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_AUTHOR_NAME: '<%name%>'
+          GIT_AUTHOR_EMAIL: '<%email%>'
+          GIT_COMMITTER_NAME: '<%name%>'
+          GIT_COMMITTER_EMAIL: '<%email%>'
