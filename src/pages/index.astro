@@ -1,0 +1,15 @@
+---
+import Profile from "components/Profile/index.astro";
+import Layout from "layouts/index.astro";
+import type { UserProfile } from "types/user";
+
+const profile = (await fetch(
+  `https://linkfree.eddiehub.io/api/users/${import.meta.env.LINKFREE_USERNAME}`
+).then((res) => res.json())) as UserProfile;
+
+const { name, bio } = profile;
+---
+
+<Layout title={`${name} • ${bio}`}>
+  <Profile {...profile} />
+</Layout>

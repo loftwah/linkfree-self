@@ -48,6 +48,6 @@ const eslintConfig = {
       version: "detect",
     },
   },
-}
+};
 
-module.exports = eslintConfig
+module.exports = eslintConfig;
