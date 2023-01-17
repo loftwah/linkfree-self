@@ -11,6 +11,8 @@ export interface UserProfile {
     url: string;
     icon: string;
     clicks: number;
+    color?: string;
   }>;
   testimonials?: string[];
+  views: number;
 }
