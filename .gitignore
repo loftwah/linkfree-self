@@ -1,5 +1,5 @@
 package-lock.json
-
+.netlify/
 
 # Created by https://www.toptal.com/developers/gitignore/api/git,node,react,nextjs,vercel,dotenv,yarn,fish,linux,zsh,windows,osx,macos,emacs,vim,visualstudiocode,sublimetext,notepadpp,ssh,tower,storybookjs,now,replit
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,node,react,nextjs,vercel,dotenv,yarn,fish,linux,zsh,windows,osx,macos,emacs,vim,visualstudiocode,sublimetext,notepadpp,ssh,tower,storybookjs,now,replit
