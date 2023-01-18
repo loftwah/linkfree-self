@@ -16,7 +16,7 @@ const IconComponent = FaIcons[icon as keyof typeof FaIcons] ?? SiIcons[icon as k
   target="_blank"
   rel="noopener noreferrer"
 >
-  <span style={color ? `color: ${color};` : undefined}>
+  <span style={color ? `color: ${color};` : undefined} class="hidden sm:inline-block">
     <IconComponent />
   </span>
   <span class="md:text-lg">{name}</span>
