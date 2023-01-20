@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint:
-    if: github.repository_owner == '<%username%>'
+    if: github.repository_owner == 'krshoss'
     name: Lint
     runs-on: ubuntu-latest
 
@@ -19,7 +19,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: npm run lint --if-present
   build:
-    if: github.repository_owner == '<%username%>'
+    if: github.repository_owner == 'krshoss'
     needs: lint
     name: Build
     runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: npm build --if-present
   test:
-    if: github.repository_owner == '<%username%>'
+    if: github.repository_owner == 'krshoss'
     needs:
       - lint
       - build
@@ -49,7 +49,7 @@ jobs:
       - run: npm run test --if-present
 
   release:
-    if: github.repository_owner == '<%username%>'
+    if: github.repository_owner == 'krshoss'
     needs:
       - lint
       - build

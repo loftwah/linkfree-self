@@ -1,5 +1,5 @@
 ---
-import Profile from "components/Profile/index.astro";
+import Link from "components/Link.astro";
 import Layout from "layouts/index.astro";
 import type { UserProfile } from "types/user";
 
@@ -7,9 +7,34 @@ const profile = (await fetch(
   `https://linkfree.eddiehub.io/api/users/${import.meta.env.LINKFREE_USERNAME}`
 ).then((res) => res.json())) as UserProfile;
 
-const { name, bio } = profile;
+const { name, bio, avatar, links } = profile;
 ---
 
 <Layout title={`${name} • ${bio}`}>
-  <Profile {...profile} />
+  <div
+  class="flex flex-col items-center justify-center min-h-screen w-full space-y-12 container px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20 m-auto"
+>
+  <div class="flex flex-row justify-center items-center space-x-4 sm:space-x-8">
+    <div class="flex flex-col items-center justify-center aspect-square w-32 h-32">
+      <img
+        class="aspect-square rounded-full h-full w-full"
+        src={avatar}
+        alt={name}
+        width={128}
+        height={128}
+      />
+    </div>
+    <div class="flex flex-col justify-center space-y-4">
+      <h1 class="text-2xl sm:text-4xl font-bold">{name}</h1>
+      <p class="sm:text-xl text-gray-400 max-w-md">{bio}</p>
+    </div>
+  </div>
+  <div class="flex flex-col justify-center space-y-2 w-full container">
+    {
+      links.map((link) => (
+        <Link {...link} />
+      ))
+    }
+  </div>
+</div>
 </Layout>
